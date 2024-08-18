@@ -1,6 +1,7 @@
 import React from "react";
 import router from "./Router";
 import { RouterProvider } from "react-router-dom";
+import AdminApp from "./AdminApp";
 
 const App = () => {
   return (
