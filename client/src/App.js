@@ -1,12 +1,13 @@
 import React from "react";
 import router from "./Router";
 import { RouterProvider } from "react-router-dom";
-import AdminApp from "./AdminApp";
+import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <div className="App">
-      Nav
       <RouterProvider router={router} />
     </div>
   )

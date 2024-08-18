@@ -1,27 +1,47 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
-import AdminApp from "./AdminApp";
+import Profile from "./pages/Profile";
+import Navbar from "./components/Navbar";
+
+const NavbarWrapper = () => {
+    return (
+        <div>
+            <Navbar />
+            <Outlet />
+        </div>
+    )
+}
 
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <Home />
-    },
-    {
-        path: "/admin/*",
-        element: <AdminApp />
-    },
-    {
-        path: "about",
-        element: <About />
-    },
-    // {
-    //     path: "*",
-    //     element: <NotFound />
-    // }
+        path: "/", 
+        element: <NavbarWrapper/>,
+        children: [
+            {
+                path: "/",
+                element: <Home />
+            },
+            {
+                path: "home",
+                element: <Home />
+            },
+            {
+                path: "about",
+                element: <About />
+            },
+            {
+                path: "profile",
+                element: <Profile />
+            },
+            {
+                path: "*",
+                element: <NotFound />
+            }
+        ]
+    }
 ])
 
 export default router;
