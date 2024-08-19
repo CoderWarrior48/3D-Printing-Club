@@ -6,7 +6,7 @@ const About = () => {
         <div>
             <h1>About</h1>
             <div className="flex justify-center items-center h-screen w-screen">
-                <ModelViewer />
+                <ModelViewer path="/sampleProduct.obj" />
             </div>
         </div>
     )

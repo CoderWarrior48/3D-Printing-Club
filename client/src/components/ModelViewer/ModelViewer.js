@@ -1,25 +1,26 @@
-import { Canvas } from '@react-three/fiber';
-import { useLoader } from '@react-three/fiber'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+import React, { useRef } from 'react';
+import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MeshStandardMaterial } from 'three';
 
-const ModelViewer = () => {
+const ModelViewer = ({ path }) => {
+  const obj = useLoader(OBJLoader, path);
+  const ref = useRef();
 
-  const earth = useLoader(OBJLoader, '/sampleProduct.obj');
-
+  // Apply orange material to the model
+  obj.traverse((child) => {
+    if (child.isMesh) {
+      child.material = new MeshStandardMaterial({ color: 'orange' });
+    }
+  });
 
   return (
-    <Canvas frameloop="demand" camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 100] }}>
-      <OrbitControls autoRotate enableZoom={true} maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} enablePan={true} /> 
-      <mesh receiveShadow castShadow>
-        <primitive object={earth} scale={1} />
-        <MeshStandardMaterial color="blue" />
-      </mesh>
-      <ambientLight intensity={0.1} />
-      <directionalLight color="red" position={[0, 0, 5]}  castShadow/>
-      <directionalLight color="blue" position={[0, 10, 0]} castShadow/>
-
+    <Canvas camera={{ position: [0, 0, 5] }}>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+      <primitive object={obj} ref={ref} scale={[0.5, 0.5, 0.5]} />
+      <OrbitControls />
     </Canvas>
   );
 };
