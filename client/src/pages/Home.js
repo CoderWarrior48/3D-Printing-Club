@@ -1,11 +1,11 @@
 import React from "react";
-import Banner from "../components/Banner";
+import VideoBackground from "../components/VideoBackground/VideoBackground";
 
 const Home = () => {
     return (
         <div>
-            <Banner />
-            <h1>Home Page</h1>
+            <VideoBackground src="https://mdbootstrap.com/img/video/Lines.mp4"/>
+            
         </div>
             
     )

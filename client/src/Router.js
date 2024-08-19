@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 const NavbarWrapper = () => {
     return (
