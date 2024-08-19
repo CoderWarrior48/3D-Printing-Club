@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar/Navbar";
+import Explore from "./pages/Explore";
 
 const NavbarWrapper = () => {
     return (
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: "about",
                 element: <About />
+            },
+            {
+                path: "explore",
+                element: <Explore />
             },
             {
                 path: "profile",

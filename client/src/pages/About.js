@@ -1,7 +1,15 @@
 import React from "react";
+import ModelViewer from "../components/ModelViewer/ModelViewer";
 
 const About = () => {
-    return <h1>About Page</h1>;
+    return (
+        <div>
+            <h1>About</h1>
+            <div className="flex justify-center items-center h-screen w-screen">
+                <ModelViewer />
+            </div>
+        </div>
+    )
 }
 
 export default About;

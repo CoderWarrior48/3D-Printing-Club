@@ -13,12 +13,12 @@ const VideoContainer = styled.div`
     align-items: center;
 `;
 const TextContainer = styled.div`
-  background-color: green;
   text-align: center;
   display: flex;
   justify-items: center;
   align-items: center;
   height: 100vh;
+  color: white;
 `;
 const Video = styled.video`
   position: absolute;
@@ -35,15 +35,10 @@ const VideoBackground = ({src}) => {
             <source src={src} type="video/mp4" />
         </Video>
         <TextContainer>
-          <div style={{backgroundColor: 'red', height: 'min-content'}}>
+          <div style={{height: 'min-content'}}>
             <h1>DO 3D Printing Club</h1>
             <h4>Unbound posibilities</h4>
-            <Link
-                className="btn btn-outline-light btn-lg"
-                to={`explore`}
-            >
-            Explore
-            </Link>
+            <Link className="btn btn-outline-light btn-lg" to={`/explore`}>Explore</Link>
           </div>
         </TextContainer>
       </VideoContainer>   
