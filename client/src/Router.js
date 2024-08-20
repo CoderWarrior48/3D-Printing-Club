@@ -6,6 +6,8 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import Explore from "./pages/Explore";
+import PrivateRoutes from "./PrivateRoutes";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const NavbarWrapper = () => {
     return (
@@ -46,7 +48,17 @@ const router = createBrowserRouter([
                 element: <NotFound />
             }
         ]
-    }
+    },
+    {
+        path: "/",
+        element: <PrivateRoutes />,
+        children: [
+            {
+                path: "/admin",
+                element: <AdminDashboard />
+            },
+        ]
+    },
 ])
 
 export default router;
