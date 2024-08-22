@@ -1,13 +1,12 @@
 import React from "react";
 import ModelViewer from "../components/ModelViewer/ModelViewer";
+import Loading from "../components/Loading/Loading";
 
 const About = () => {
     return (
         <div>
             <h1>About</h1>
-            <div className="flex justify-center items-center h-screen w-screen">
-                <ModelViewer path="/sampleProduct.obj" />
-            </div>
+            <p>This page is going to be for info about our club (still in construction)</p>
         </div>
     )
 }
