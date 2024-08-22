@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+#/build #Temp solution so I don't have to build on dev environ and server
 
 # misc
 .DS_Store
