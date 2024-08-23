@@ -1,4 +1,5 @@
-import Color  from "./components/Color";
+import { Color } from "./fields/Color";
+import { Range } from "./fields/Range";
 
 export const config = {
   components: {
@@ -9,33 +10,24 @@ export const config = {
           type: "text",
         },
         textAlign: {
-          name: "align",
-          type: "select",
+          name: "Align",
+          type: "radio",
           options: [
             { label: "Left", value: "left" },
             { label: "Center", value: "center" },
             { label: "Right", value: "right" },
           ],
         },
-        fontSize: {
-          name: "Font size",
-          type: "number",
-        },
-        color: {
-          type: "custom",
-          render: <Color />
-        },
-        params: {
-          type: "object",
-          objectFields: {
-            title: { type: "text" },
-          },
-        },
+        fontSize: Range,
+        color: Color('Text color'),
         
       },
-      render: ({ text, textAlign, fontSize, color }) => {
-        return <h1 style={{ textAlign, color, fontSize }}>{text}</h1>;
+      render: ({ text, textAlign, fontSize, color}) => {
+        return <h1 style={{ textAlign: textAlign, fontSize: fontSize, color: color }}>{text}</h1>;
       },
     },
   },
+  Paragraph: {
+    fields:
+  }
 };
