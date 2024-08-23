@@ -1,17 +1,8 @@
 import React from 'react';
 import { Puck } from '@measured/puck';
 import '@measured/puck/dist/index.css';
+import { config }from './Config';
 
-const config = {
-  components: {
-    HeadingBlock: {
-      fields: {
-        children: { type: 'text' },
-      },
-      render: ({ children }) => <h1>{children}</h1>,
-    },
-  },
-};
 
 const initialData = {};
 

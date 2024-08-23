@@ -1,17 +1,41 @@
-// Puck configuration, describing components to drag-and-drop
+import Color  from "./components/Color";
+
 export const config = {
-    components: {
-      HeadingBlock: {
-        // Field types to render for each prop of your component
-        fields: {
-          children: {
-            type: "text",
+  components: {
+    Heading: {
+      fields: {
+        text: {
+          name: "Text",
+          type: "text",
+        },
+        textAlign: {
+          name: "align",
+          type: "select",
+          options: [
+            { label: "Left", value: "left" },
+            { label: "Center", value: "center" },
+            { label: "Right", value: "right" },
+          ],
+        },
+        fontSize: {
+          name: "Font size",
+          type: "number",
+        },
+        color: {
+          type: "custom",
+          render: <Color />
+        },
+        params: {
+          type: "object",
+          objectFields: {
+            title: { type: "text" },
           },
         },
-        // Your render function
-        render: ({ children }) => {
-          return <h1>{children}</h1>;
-        },
+        
+      },
+      render: ({ text, textAlign, fontSize, color }) => {
+        return <h1 style={{ textAlign, color, fontSize }}>{text}</h1>;
       },
     },
-  };
+  },
+};
