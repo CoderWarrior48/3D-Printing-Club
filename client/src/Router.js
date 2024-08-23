@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Explore from "./pages/Explore";
 import PrivateRoutes from "./PrivateRoutes";
 import AdminDashboard from "./pages/AdminDashboard";
+import Editor  from "./components/Editor/Editor";
 
 const NavbarWrapper = () => {
     return (
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: "profile",
                 element: <Profile />
+            },
+            {
+                path: "editor",
+                element: <Editor />
             },
             {
                 path: "*",
