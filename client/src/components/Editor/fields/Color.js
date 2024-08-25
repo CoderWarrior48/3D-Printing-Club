@@ -1,19 +1,27 @@
-export const Color = ({name}) => {
+export const Color = (name) => {
   return(
     {
-    name: name,
+    label: name,
     type: "custom",
-    render: ({ name, onChange, value }) => (
+    render: ({ label, onChange, value }) => (
       <div>
-      <label for="customRange1" class="form-label">{name}</label>
+      <label for="colorfield" class="form-label">{name}</label>
+      <br/>
       <input
         type="color"
-        class="form-color"
+        class="form-color form-control-color"
+        id="colorfield"
         defaultValue={value}
         name={name}
         onChange={(e) => onChange(e.currentTarget.value)}
       />
-      {value}
+      <input
+        type="text"
+        class="form-control"
+        defaultValue={value}
+        name={name}
+        onChange={(e) => onChange(e.currentTarget.value)}
+      />
       </div>
     ),
     }
