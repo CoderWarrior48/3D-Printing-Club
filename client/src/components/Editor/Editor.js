@@ -13,7 +13,16 @@ const save = (data) => {
 const Editor = () => {
   return (
   <div>
-    <Puck config={config} data={initialData} onPublish={save} />;
+    <Puck 
+      config={config} 
+      data={initialData} 
+      onPublish={save} 
+      // overrides={{
+      //   componentItem: ({ name }) => (
+      //     <div style={{ backgroundColor: "hotpink" }}>{name}</div>
+      //   ),
+      // }}
+      />;
   </div>
   )
 };
