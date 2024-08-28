@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./components/Loading/Loading";
+import Restricted from "./pages/Restricted";
 
 const PrivateRoutes = () => {
 
@@ -13,7 +14,7 @@ const PrivateRoutes = () => {
         const roles = user.user_roles || [];
 
         if (!roles.includes('Admin')) {
-            return <div>Access Denied</div>;
+            return <Restricted/>;
         }
         else {
             return  <Outlet/>;

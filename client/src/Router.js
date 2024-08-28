@@ -9,6 +9,8 @@ import Explore from "./pages/Explore";
 import PrivateRoutes from "./PrivateRoutes";
 import AdminDashboard from "./pages/AdminDashboard";
 import Editor  from "./components/Editor/Editor";
+import { Render } from "@measured/puck";
+import ScrollVideo from "./components/ScrollVideo/ScrollVideo";
 
 const NavbarWrapper = () => {
     return (
@@ -19,7 +21,7 @@ const NavbarWrapper = () => {
     )
 }
 
-const router = createBrowserRouter([
+let routes = [
     {
         path: "/", 
         element: <NavbarWrapper/>,
@@ -45,10 +47,6 @@ const router = createBrowserRouter([
                 element: <Profile />
             },
             {
-                path: "editor",
-                element: <Editor />
-            },
-            {
                 path: "*",
                 element: <NotFound />
             }
@@ -62,8 +60,30 @@ const router = createBrowserRouter([
                 path: "/admin",
                 element: <AdminDashboard />
             },
+            {
+                path: "/editor",
+                element: <Editor />
+            },
+            {
+                path: "/gsap",
+                element: ( <div>
+                    <h1>Scroll to see the video animation</h1>
+                    <ScrollVideo />
+                    <div style={{ height: '200vh' }}></div> {/* Create extra space to enable scrolling */}
+                  </div>)
+            }
         ]
     },
-])
+]
+
+const addPage = (pageName, pageRoute, data) => {
+    routes[0].children.push(
+        {
+            path: pageRoute,
+            element: <Render data={data} />
+        }
+    )
+}
+const router = createBrowserRouter(routes);
 
 export default router;

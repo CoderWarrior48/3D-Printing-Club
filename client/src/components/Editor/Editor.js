@@ -3,14 +3,13 @@ import { Puck } from '@measured/puck';
 import '@measured/puck/dist/index.css';
 import { config }from './Config';
 
-
 const initialData = {};
 
 const save = (data) => {
-  console.log('Data saved:', data);
+  alert(data)
 };
 
-const Editor = () => {
+const Editor = (pageName) => {
   return (
   <div>
     <Puck 

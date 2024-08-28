@@ -3,7 +3,7 @@ import { Color } from "../fields/Color";
 import { Range } from "../fields/Range";
 
 const ParagraphBlock = {
-    label: "lay",
+    label: "Split Layout",
     render: () => {
         return ( 
         <div style={{display: 'flex'}}>
