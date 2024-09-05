@@ -1,0 +1,17 @@
+.box {
+    width: var(--size);
+    height: var(--size);
+    border-radius: 2rem;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    background-color: var(--primary);
+    font-weight: 600;
+    color: var(--light);
+  }
+  .App {
+    display: grid;
+    place-content: center;
+    gap: 1rem;
+    min-height: 100vh;
+  }

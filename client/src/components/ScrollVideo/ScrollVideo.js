@@ -1,64 +1,44 @@
-// ScrollVideo.js
-import React, { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import './Animation.css';
 
-gsap.registerPlugin(ScrollTrigger);
+const timeline = gsap.timeline({ repeat: -1, yoyo: true });
 
-const ScrollVideo = () => {
-  const videoRef = useRef(null);
+export default function ScrollVideo() {
+  const tl = useRef(timeline);
+  const app = useRef(null);
+  const circle = useRef(null);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      tl.current
+        // use scoped selectors 
+        // i.e., selects matching children only
+        .to(".box", {
+          rotation: 360,
+          borderRadius: 0,
+          x: 100,
+          y: 100,
+          scale: 1.5,
+          duration: 1
+        })
+        // or refs
+        .to(circle.current, {
+          rotation: 360,
+          borderRadius: 50,
+          x: -100,
+          y: -100,
+          scale: 1.5,
+          duration: 1
+        });
+    }, app.current);
 
-    // Ensure the video is fully loaded and has a duration
-    const onLoadedData = () => {
-      const videoDuration = video.duration;
-      if (isNaN(videoDuration)) return;  // Check if duration is valid
-
-      // ScrollTrigger to keep video centered until scroll is complete
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "video",
-          start: "top top",
-          end: "bottom+=200% bottom",
-          scrub: true,
-          markers: true
-        }
-      });
-    };
-
-    video.addEventListener('loadeddata', onLoadedData);
-
-    return () => {
-      video.removeEventListener('loadeddata', onLoadedData);
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div style={{ height: '200vh' }}> {/* Make enough space to scroll */}
-      <div style={{ 
-        position: 'fixed', 
-        top: '50%', 
-        left: '50%', 
-        transform: 'translate(-50%, -50%)', 
-        width: '600px', 
-        height: '400px' 
-      }}>
-        <video
-          ref={videoRef}
-          width="600"
-          autoplay="false"
-          height="400"
-          style={{ maxWidth: '100%', maxHeight: '100%' }}
-        >
-          <source src="/printerSplash.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+    <div ref={app} className="App">
+        <div className="box" style={{backgroundColor:'red'}}>selector</div>
     </div>
   );
-};
-
-export default ScrollVideo;
+}

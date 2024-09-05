@@ -66,11 +66,7 @@ let routes = [
             },
             {
                 path: "/gsap",
-                element: ( <div>
-                    <h1>Scroll to see the video animation</h1>
-                    <ScrollVideo />
-                    <div style={{ height: '200vh' }}></div> {/* Create extra space to enable scrolling */}
-                  </div>)
+                element: <ScrollVideo />
             }
         ]
     },
