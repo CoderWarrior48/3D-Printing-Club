@@ -11,6 +11,10 @@ export const config = {
     LayoutSplit
   },
   root: {
+    fields: {
+      title: { type: "text" }, // We need to redefine the `title` field if we want to retain it
+      route: { type: "text" },
+    },
     render: ({ children }) => {
       return <div>{children}</div>;
     },
