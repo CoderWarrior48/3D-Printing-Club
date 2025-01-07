@@ -3,6 +3,15 @@ import { useRouter } from "expo-router";
 import { View } from "react-native";
 import { useAuth } from "./AuthProvider";
 import { useEffect } from "react";
+import { VStack } from "@/components/ui/vstack";
+import { Image } from "@/components/ui/image";
+import { Heading } from "@/components/ui/heading";
+import { Icon } from "@/components/ui/icon";
+import {
+    GluestackIcon,
+    GluestackIconDark,
+  } from "./assets/icons/gluestack-icon";
+const printerIcon = require("@/assets/images/3dpc.png");
 
 export default function Home() {
     const router = useRouter();
@@ -11,19 +20,37 @@ export default function Home() {
         if (authState?.authenticated) {
             router.push("/home")
         }
-    }, [])
+    }, [authState?.authenticated])
 
-    const handleSignIn = () => {
-      // This will navigate to the /sign-in page
-      router.push('/sign-in');
-    };
+
+    const navigateToSignIn = () => {
+        router.push('/sign-in')
+    }
+
     return (
-        <View>
-            <Button onPress={handleSignIn}>
-                <ButtonText>
-                    Sign in
-                </ButtonText>
-            </Button>
-        </View>
+        
+        <VStack
+      className="w-full max-w-[440px] items-center h-full justify-center"
+      space="lg"
+    >
+        <Icon as={EyeIcon} className="w-[219px] h-10" />
+      <VStack className="w-full" space="lg">
+        <Button
+          className="w-full"
+          onPress={() => {
+            router.push("/sign-in");
+          }}
+        >
+          <ButtonText className="font-medium">Log in</ButtonText>
+        </Button>
+        <Button
+          onPress={() => {
+            router.push("/sign-in");
+          }}
+        >
+          <ButtonText className="font-medium">Sign Up</ButtonText>
+        </Button>
+      </VStack>
+    </VStack>
     )
 }
