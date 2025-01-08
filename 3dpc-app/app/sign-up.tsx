@@ -6,15 +6,17 @@ import { VStack } from "@/components/ui/vstack"
 import { Link, useRouter } from "expo-router"
 import React from "react"
 import { useState } from "react"
-import { Text, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import { useAuth } from "./AuthProvider"
 import { Heading } from "@/components/ui/heading"
+import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, SelectContent, SelectDragIndicatorWrapper, SelectDragIndicator, SelectItem } from "@/components/ui/select"
 
  export default function Login () {
     const [isInvalid, setIsInvalid] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordVerify, setPasswordVerify] = useState("")
     const { onLogin, onRegister } = useAuth()
 
     const router = useRouter()
@@ -46,7 +48,7 @@ import { Heading } from "@/components/ui/heading"
       
         
           <VStack className="w-full rounded-md border border-background-200 p-4">
-          <Heading size="3xl" style={{textAlign: "center", padding: 30}}>Log In</Heading>
+            <Heading size="3xl" style={{textAlign: "center", padding: 30}}>Sign Up</Heading>
             <FormControl
               isInvalid={isInvalid}
               size="md"
@@ -76,6 +78,37 @@ import { Heading } from "@/components/ui/heading"
                   onChangeText={(text) => setPassword(text)}
                 />
               </Input>
+              <Input size="md" className="mt-3">
+                <InputField
+                  type="password"
+                  placeholder="Retype Password"
+                  value={passwordVerify}
+                  onChangeText={(text) => setPasswordVerify(text)}
+                />
+              </Input>
+              <FormControlLabel>
+                <FormControlLabelText>Grade</FormControlLabelText>
+              </FormControlLabel>
+              
+              <Select>
+                <SelectTrigger variant="outline" size="md" >
+                    <SelectInput placeholder="Select option" />
+                </SelectTrigger>
+                <SelectPortal>
+                    <SelectBackdrop/>
+                    <SelectContent>
+                        <SelectDragIndicatorWrapper>
+                            <SelectDragIndicator />
+                        </SelectDragIndicatorWrapper>
+                        <SelectItem label="Freshman" value="freshman" />
+                        <SelectItem label="Softmore" value="softmore" />
+                        <SelectItem label="Junior" value="junior" />
+                        <SelectItem label="Senior" value="senior"/>
+                        </SelectContent>
+                </SelectPortal>
+              </Select>
+      
+
               {/* <FormControlHelper>
                 <FormControlHelperText>
                   Must be at least 6 characters.
@@ -88,8 +121,8 @@ import { Heading } from "@/components/ui/heading"
                 </FormControlErrorText>
               </FormControlError>
             </FormControl>
-            <Button className="w-fit mt-4" size="sm" onPress={login}>
-              <ButtonText>Login</ButtonText>
+            <Button className="w-fit mt-4" size="sm" onPress={register}>
+              <ButtonText>Create Account</ButtonText>
             </Button>
           </VStack>
     )

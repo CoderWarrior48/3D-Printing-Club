@@ -33,7 +33,7 @@ export default function Home() {
       className="w-full max-w-[440px] items-center h-full justify-center"
       space="lg"
     >
-        <Icon as={EyeIcon} className="w-[219px] h-10" />
+        {/* <Icon as={EyeIcon} className="w-[219px] h-10" /> */}
       <VStack className="w-full" space="lg">
         <Button
           className="w-full"
@@ -45,7 +45,7 @@ export default function Home() {
         </Button>
         <Button
           onPress={() => {
-            router.push("/sign-in");
+            router.push("/sign-up");
           }}
         >
           <ButtonText className="font-medium">Sign Up</ButtonText>
