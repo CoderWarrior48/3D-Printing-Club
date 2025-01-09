@@ -7,10 +7,12 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#ffd33d",
-        tabBarStyle: {
-          backgroundColor: "#25292e",
-        }, 
+        // tabBarActiveTintColor: "#ffd33d",
+        // tabBarStyle: {
+        //   backgroundColor: "#25292e",
+        //   height: 40
+        // }, 
+        headerPressOpacity: 0,
         tabBarLabel: '', // Remove titles globally
       }}
     >
@@ -18,7 +20,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Icon as={CircleUser} size="lg" color={color}/>
+            <Icon as={CircleUser} size="xl" color={color}/>
           ),
         }}
       />
@@ -26,7 +28,7 @@ export default function TabLayout() {
         name="schedule"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Icon as={Clock9} size="lg" color={color} />
+            <Icon as={Clock9} size="xl" color={color} />
           ),
         }}
       />
@@ -34,7 +36,7 @@ export default function TabLayout() {
         name="meeting"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Icon as={QrCode} size="lg" color={color}/>
+            <Icon as={QrCode} size="xl" color={color}/>
           ),
         }}
       />
@@ -42,7 +44,7 @@ export default function TabLayout() {
         name="request"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Icon as={Disc3} size="lg" color={color}/>
+            <Icon as={Disc3} size="xl" color={color}/>
           ),
         }}
       />
@@ -50,7 +52,7 @@ export default function TabLayout() {
         name="calender"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Icon as={Calendar} size="lg" color={color}/>
+            <Icon as={Calendar} size="xl" color={color}/>
           ),
         }}
       />
