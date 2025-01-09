@@ -27,7 +27,7 @@ import { Heading } from "@/components/ui/heading"
       }
       else {
         setIsInvalid(false)
-        router.push("/home")
+        router.push("/meeting")
       }
     }
 

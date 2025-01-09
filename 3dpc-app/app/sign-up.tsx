@@ -17,6 +17,7 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordVerify, setPasswordVerify] = useState("")
+    const [grade, setGrade] = useState("")
     const { onLogin, onRegister } = useAuth()
 
     const router = useRouter()
@@ -34,6 +35,16 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
     }
 
     const register = async () => {
+      if (email.trim() === "" || password.trim() === "" || passwordVerify.trim() === "" || grade.trim() === "") {
+        setIsInvalid(true)
+        setErrorMessage("All fields must be filled in")
+        return
+      }
+      if (password != passwordVerify) {
+        setIsInvalid(true)
+        setErrorMessage("Passwords don't match")
+        return
+      }
       const result = await onRegister(email, password)
       if (result && result.error) {
         setIsInvalid(true)
@@ -90,7 +101,7 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
                 <FormControlLabelText>Grade</FormControlLabelText>
               </FormControlLabel>
               
-              <Select>
+              <Select value={grade} onValueChange={(text) => setGrade(text)}>
                 <SelectTrigger variant="outline" size="md" >
                     <SelectInput placeholder="Select option" />
                 </SelectTrigger>
@@ -124,6 +135,7 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
             <Button className="w-fit mt-4" size="sm" onPress={register}>
               <ButtonText>Create Account</ButtonText>
             </Button>
+            <Text>Grade: {grade}</Text>
           </VStack>
     )
 }

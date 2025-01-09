@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Text, View } from "react-native";
-import { API_URL, useAuth } from "../AuthProvider";
+import { API_URL, useAuth } from "../../AuthProvider";
 import axios from "axios";
 import { Button, ButtonText } from "@/components/ui/button";
 
