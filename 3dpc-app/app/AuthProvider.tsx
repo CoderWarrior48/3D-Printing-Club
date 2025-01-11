@@ -29,16 +29,20 @@ export const AuthProvider = ({children}: any) => {
     // If token is still there from past session, automatically use it
     useEffect(() => {
         const loadToken = async () => {
-            const token = await SecureStore.getItemAsync(TOKEN_KEY);
-            // console.log("Stored:",token)
+            try{
+                const token = await SecureStore.getItemAsync(TOKEN_KEY);
+                // console.log("Stored:",token)
 
-            if (token) {
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            
-                setAuthState({
-                    token: token,
-                    authenticated: true
-                });
+                if (token) {
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                
+                    setAuthState({
+                        token: token,
+                        authenticated: true
+                    });
+                }
+            } catch (e) {
+                console.log("Error loading token", e)
             }
         };
         loadToken()
