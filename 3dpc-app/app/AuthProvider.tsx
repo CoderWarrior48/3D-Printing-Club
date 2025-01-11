@@ -10,7 +10,7 @@ interface AuthProps {
 }
 
 const TOKEN_KEY = 'my-jwt';
-export const API_URL = 'https://api.developbetterapps.com'
+export const API_URL = 'https://dawson.hamera.com/api'
 const AuthContext = createContext<AuthProps>({});
 
 export const useAuth = () => {
@@ -51,20 +51,20 @@ export const AuthProvider = ({children}: any) => {
     const register = async (email: string, password: string) => {
         console.log("Registered")
         try {
-            return await axios.post(`${API_URL}/users`, {email,password});
+            return await axios.post(`${API_URL}/register.php`, {email,password});
         } catch (e) {
-            return {error: true, msg: (e as any).response.data.msg}
+            return {error: true, msg: (e as any).response.data}
         }
     }; 
 
     const login = async (email: string, password: string) => {
         try {
-            const result = await axios.post(`${API_URL}/auth`, {email,password});
+            const result = await axios.post(`${API_URL}/login.php`, {email,password});
             console.log("Logged in")
-            // console.log("AuthContext.tsx:41 ~ login ~ result", result)
+            console.log("AuthContext.tsx:41 ~ login ~ result", result.data.jwt)
 
             setAuthState({
-                token: result.data.token,
+                token: result.data.jwt,
                 authenticated: true
             });
             
