@@ -18,7 +18,7 @@ export default function Home() {
     const { authState } = useAuth()
     useEffect(() => {
         if (authState?.authenticated) {
-            router.push("/meeting")
+            router.push("/profile")
         }
     }, [authState?.authenticated])
 

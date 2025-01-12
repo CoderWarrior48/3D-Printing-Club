@@ -27,19 +27,7 @@ import { Heading } from "@/components/ui/heading"
       }
       else {
         setIsInvalid(false)
-        router.push("/meeting")
-      }
-    }
-
-    const register = async () => {
-      const result = await onRegister(email, password)
-      if (result && result.error) {
-        setIsInvalid(true)
-        setErrorMessage(result.msg)
-      }
-      else {
-        setIsInvalid(false)
-        login()
+        router.push("/profile")
       }
     }
     return (

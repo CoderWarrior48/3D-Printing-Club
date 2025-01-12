@@ -64,16 +64,6 @@ export default function Schedule() {
                     </Avatar>
                   </VStack>
                 </HStack>
-                <Fab
-    size="md"
-    placement="bottom right"
-    isHovered={false}
-    isDisabled={false}
-    isPressed={false}
-  >
-    <FabIcon as={AddIcon} />
-    <FabLabel>Quick start</FabLabel>
-  </Fab>
                   <Button disabled={true}><ButtonText>Scheduled by Jane Doe</ButtonText></Button>
               </Box>
             </VStack>

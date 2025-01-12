@@ -30,7 +30,7 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
       }
       else {
         setIsInvalid(false)
-        router.push("/home")
+        router.push("/profile")
       }
     }
 
