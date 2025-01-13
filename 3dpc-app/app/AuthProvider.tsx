@@ -83,15 +83,15 @@ export const AuthProvider = ({children}: any) => {
         }
     })
 
-    const register = async (email: string, password: string) => {
+    const register = async (first_name: string, last_name: string, email: string, password: string, grade: string) => {
         console.log("Registered")
         try {
-            const result = await axios.post(`${API_URL}/login.php`, {email,password});
+            const result = await axios.post(`${API_URL}/register.php`, {first_name, last_name, email, password, grade});
             if (result.data.error != null) {
                 console.log("Register error:", result.data.error)
                 return {error: true, msg: result.data.error}
             }
-            return await axios.post(`${API_URL}/register.php`, {email,password});
+            return result;
 
         } catch (e) {
             return {error: true, msg: (e as any).response.data}
@@ -148,7 +148,8 @@ export const AuthProvider = ({children}: any) => {
         onRegister: register,
         onLogin: login,
         onLogout: logout,
-        authState
+        authState,
+        userState
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

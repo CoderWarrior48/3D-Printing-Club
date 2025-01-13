@@ -14,6 +14,8 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
  export default function Login () {
     const [isInvalid, setIsInvalid] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordVerify, setPasswordVerify] = useState("")
@@ -35,7 +37,7 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
     }
 
     const register = async () => {
-      if (email.trim() === "" || password.trim() === "" || passwordVerify.trim() === "" || grade.trim() === "") {
+      if (firstName.trim() === "" || lastName.trim() === "" || email.trim() === "" || password.trim() === "" || passwordVerify.trim() === "" || grade.trim() === "") {
         setIsInvalid(true)
         setErrorMessage("All fields must be filled in")
         return
@@ -45,7 +47,7 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
         setErrorMessage("Passwords don't match")
         return
       }
-      const result = await onRegister(email, password)
+      const result = await onRegister(firstName, lastName, email, password, grade)
       if (result && result.error) {
         setIsInvalid(true)
         setErrorMessage(result.msg)
@@ -73,7 +75,23 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
               <Input size="md">
                 <InputField
                   type="text"
-                  placeholder="email"
+                  placeholder="First Name"
+                  value={firstName}
+                  onChangeText={(text) => setFirstName(text)}
+                />
+              </Input>
+              <Input size="md">
+                <InputField
+                  type="text"
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChangeText={(text) => setLastName(text)}
+                />
+              </Input>
+              <Input size="md">
+                <InputField
+                  type="text"
+                  placeholder="Email"
                   value={email}
                   onChangeText={(text) => setEmail(text)}
                 />
@@ -112,7 +130,7 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
                             <SelectDragIndicator />
                         </SelectDragIndicatorWrapper>
                         <SelectItem label="Freshman" value="freshman" />
-                        <SelectItem label="Softmore" value="softmore" />
+                        <SelectItem label="Sophomore" value="sophomore" />
                         <SelectItem label="Junior" value="junior" />
                         <SelectItem label="Senior" value="senior"/>
                         </SelectContent>
@@ -135,7 +153,6 @@ import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, Selec
             <Button className="w-fit mt-4" size="sm" onPress={register}>
               <ButtonText>Create Account</ButtonText>
             </Button>
-            <Text>Grade: {grade}</Text>
           </VStack>
     )
 }

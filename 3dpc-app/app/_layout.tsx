@@ -41,7 +41,7 @@ export default function RootLayout() {
         </View>
         )} */}
           <Slot/>
-          <Fab
+          {/* <Fab
             size="md"
             placement="bottom right"
             isHovered={false}
@@ -49,7 +49,7 @@ export default function RootLayout() {
             isPressed={false}
           >
             <FabIcon as={MessageCircleWarningIcon} />
-          </Fab>
+          </Fab> */}
       </AuthProvider>
     </GluestackUIProvider>
   )
