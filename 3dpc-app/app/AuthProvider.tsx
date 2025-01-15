@@ -118,7 +118,8 @@ export const AuthProvider = ({children}: any) => {
             console.log("Role:", userState)
             
             //All future requests will have token now
-            axios.defaults.headers.common['Authorization'] = `Bearer ${result.data.jwt}`;
+            //Switched from normal 'Authorization' to 'Token' because cors has weird guidelines in place and I cant get it to pass through. Possible future fix?
+            axios.defaults.headers.common['Token'] = `Bearer ${result.data.jwt}`;
             
             //Store token securly
             await SecureStore.setItemAsync(TOKEN_KEY, result.data.jwt);

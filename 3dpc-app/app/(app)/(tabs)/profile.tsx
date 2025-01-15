@@ -18,6 +18,7 @@ export default function Profile() {
       console.log("start")
       try {
       const result = await axios.get(`https://dawson.hamera.com/api/add_meeting.php`);
+      console.log(":::",result)
       console.log("WoW",result.data)
       
     } catch (e) {
