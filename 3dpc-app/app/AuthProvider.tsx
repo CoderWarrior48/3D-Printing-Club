@@ -91,9 +91,11 @@ export const AuthProvider = ({children}: any) => {
                 console.log("Register error:", result.data.error)
                 return {error: true, msg: result.data.error}
             }
+            console.log("registerered:", result)
             return result;
 
         } catch (e) {
+            console.log(" error:", {error: true, msg: (e as any).response.data})
             return {error: true, msg: (e as any).response.data}
         }
     }; 

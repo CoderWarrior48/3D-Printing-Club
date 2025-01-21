@@ -9,13 +9,10 @@ export default function AppLayout() {
 
   // Only require authentication within the (app) group's layout as users
   // need to be able to access the (auth) group and sign in again.
-  if (!authState?.authenticated) {
+  if (!(authState?.authenticated && userState?.role === "admin")) {
     // On web, static rendering will stop here as the user is not authenticated
     // in the headless Node process that the pages are rendered in.
     return <Redirect href="/" />;
-  }
-  if (userState?.role === "admin") {
-    return <Redirect href="/dashboard" />
   }
 
   // This layout can be deferred because it's not the root layout.

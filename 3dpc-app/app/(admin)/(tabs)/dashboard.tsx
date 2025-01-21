@@ -12,7 +12,7 @@ import { House, LayoutGrid, MenuIcon, Shield } from "lucide-react-native";
 import axios from "axios";
 import { Button, ButtonText } from "@/components/ui/button";
 
-export default function Profile() {
+export default function Dashboard() {
     const { userState } = useAuth()
     const test = async () => {
       console.log("start")
@@ -38,7 +38,7 @@ export default function Profile() {
           <Shield></Shield>
         </AvatarBadge>
       </Avatar>
-      <Text>Name: {userState?.firstName}{userState?.lastName} role: {userState?.role}</Text>
+      <Text>You a admin Name: {userState?.firstName}{userState?.lastName} role: {userState?.role}</Text>
     </Center>
     <Button onPress={test}><ButtonText>Test</ButtonText></Button>
     </VStack>
