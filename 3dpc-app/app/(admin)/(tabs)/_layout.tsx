@@ -3,7 +3,7 @@ import { Avatar, AvatarFallbackText } from "@/components/ui/avatar";
 import { HStack } from "@/components/ui/hstack";
 import { Icon } from "@/components/ui/icon";
 import { router, Tabs, useRouter } from "expo-router";
-import { Calendar, CircleUser, Clock9, Disc3, LayoutGrid, QrCode } from "lucide-react-native";
+import { Calendar, CircleUser, Clock9, Disc3, Group, LayoutGrid, QrCode, Shield } from "lucide-react-native";
 import { Pressable, View, Text, SafeAreaView } from "react-native";
 
 export default function TabLayout() {
@@ -19,7 +19,7 @@ export default function TabLayout() {
             <Icon as={LayoutGrid} size="lg" className="mx-5" />
             <Text className="text-2xl">3D Printing Club</Text>
           </HStack>
-          <Pressable onPress={() => router.push("/profile")}>
+          <Pressable onPress={() => router.push("/dashboard")}>
             <Avatar className="h-9 w-9">
               <AvatarFallbackText className="font-light">
                 {userState?.firstName + " " + userState?.lastName}
@@ -38,39 +38,15 @@ export default function TabLayout() {
             }}
           >
             <Tabs.Screen
-              name="profile"
+              name="dashboard"
               options={{
                 tabBarIcon: ({ color, focused }) => (
-                  <Icon as={CircleUser} size="xl" color={color} />
+                  <Icon as={Shield} size="xl" color={color} />
                 ),
               }}
             />
             <Tabs.Screen
-              name="schedule"
-              options={{
-                tabBarIcon: ({ color, focused }) => (
-                  <Icon as={Clock9} size="xl" color={color} />
-                ),
-              }}
-            />
-            <Tabs.Screen
-              name="meeting"
-              options={{
-                tabBarIcon: ({ color, focused }) => (
-                  <Icon as={QrCode} size="xl" color={color} />
-                ),
-              }}
-            />
-            <Tabs.Screen
-              name="request"
-              options={{
-                tabBarIcon: ({ color, focused }) => (
-                  <Icon as={Disc3} size="xl" color={color} />
-                ),
-              }}
-            />
-            <Tabs.Screen
-              name="calender"
+              name="manageMeeting"
               options={{
                 tabBarIcon: ({ color, focused }) => (
                   <Icon as={Calendar} size="xl" color={color} />

@@ -14,19 +14,6 @@ import { Button, ButtonText } from "@/components/ui/button";
 
 export default function Profile() {
     const { userState } = useAuth()
-    const test = async () => {
-      console.log("start")
-      try {
-      const result = await axios.get(`https://dawson.hamera.com/api/add_meeting.php`);
-      console.log(":::",result)
-      console.log("WoW",result.data)
-      
-    } catch (e) {
-      console.log("ERROR:",e)
-      return {error: true, msg: (e as any)}
-  }
-    }
-    test()
    
 
     return (

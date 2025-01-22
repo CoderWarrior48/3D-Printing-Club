@@ -1,0 +1,15 @@
+fetch('https://dawson.hamera.com/api/add_event.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'  // Change to form-urlencoded
+  },
+  body: new URLSearchParams({
+    event_name: "Football",
+    verification_code: "54gty675",
+    start_time: "2025-01-21 14:30:00",
+    end_time: "2025-01-21 14:30:00"
+  })
+})
+  .then(response => response.json())  // Parse JSON response
+  .then(data => console.log(data))     // Log the response data
+  .catch(error => console.error('Error:', error));  // Handle any errors
