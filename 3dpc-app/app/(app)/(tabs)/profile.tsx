@@ -27,7 +27,6 @@ export default function Profile() {
       </Avatar>
       <Text>Name: {userState?.firstName}{userState?.lastName} role: {userState?.role}</Text>
     </Center>
-    <Button onPress={test}><ButtonText>Test</ButtonText></Button>
     </VStack>
     )
 }
