@@ -13,3 +13,49 @@ fetch('https://dawson.hamera.com/api/add_event.php', {
   .then(response => response.json())  // Parse JSON response
   .then(data => console.log(data))     // Log the response data
   .catch(error => console.error('Error:', error));  // Handle any errors
+
+ <FormControl
+                  isInvalid={isInvalid}
+                  size="md"
+                  isDisabled={false}
+                  isReadOnly={false}
+                  isRequired={false}
+                >
+                  <FormControlLabel>
+                    <FormControlLabelText>Name</FormControlLabelText>
+                  </FormControlLabel>
+                  <Input size="md">
+                    <InputField
+                      type="text"
+                      placeholder="name"
+                      value={eventName}
+                      onChangeText={(text) => setEventName(text)}
+                    />
+                  </Input>
+                  <FormControlLabel>
+                    <FormControlLabelText>Duration</FormControlLabelText>
+                  </FormControlLabel>
+                  <Input size="md" className="mb-3">
+                    <InputField
+                      type="text"
+                      placeholder="Start date"
+                      value={startDate}
+                      onChangeText={(text) => setStartDate(text)}
+                    />
+                  </Input>
+                  <Input size="md">
+                    <InputField
+                      type="text"
+                      placeholder="End date"
+                      value={endDate}
+                      onChangeText={(text) => setEndDate(text)}
+                    />
+                  </Input>
+                  
+                  <FormControlError>
+                    <FormControlErrorIcon as={AlertCircleIcon} />
+                    <FormControlErrorText>
+                      {errorMessage}
+                    </FormControlErrorText>
+                  </FormControlError>
+                </FormControl>
