@@ -3,11 +3,13 @@
     "start": "cd 3dpc-app && npm start"
   },
   "dependencies": {
+    "@gluestack-ui/modal": "^0.1.35",
+    "@legendapp/motion": "^2.4.0",
     "axios": "^1.7.9",
     "expo-secure-store": "^14.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.3.3",
-    "@types/react": "~18.3.12"
+    "@types/react": "~18.3.12",
+    "typescript": "^5.3.3"
   }
 }

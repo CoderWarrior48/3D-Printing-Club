@@ -17,7 +17,7 @@ export default function Dashboard() {
   const test = async () => {
     console.log("start")
     try {
-    const result = await axios.post(`https://dawson.hamera.com/api/add_meeting.php`, {even_name:"Football",verification_code: "54gty675",start_time:"2025-01-21 14:30:00",end_time:"2025-01-21 14:30:00"});
+    const result = await axios.post(`https://dawson.hamera.com/api/add_event.php`, {event_name:"Compettion",verification_code: "rrfrferfcerferf",start_time:"2025-01-21 14:30:00",end_time:"2025-01-21 14:30:00"});
     console.log(axios.defaults.headers.common['Authorization'])
     console.log("WoW",result.data)
     
@@ -26,7 +26,7 @@ export default function Dashboard() {
     return {error: true, msg: (e as any)}
 }
   }
-  test()
+  // test()
   return (
     <ScrollView>
       <VStack className="items-center w-full max-w-xl">
