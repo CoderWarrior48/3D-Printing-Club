@@ -73,7 +73,7 @@ export default function TabLayout() {
               }}
             />
             <Tabs.Screen
-              name="manageMeeting"
+              name="manageMeetings"
               options={{
                 tabBarIcon: ({ color, focused }) => (
                   <Icon as={Calendar} size="xl" color={color} />

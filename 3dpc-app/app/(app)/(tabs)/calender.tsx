@@ -35,6 +35,9 @@ export default function Calender() {
                 <Heading size="2xl">Attended</Heading>
             </Center>
         {attendance.map((event) => {
+          const start = event.start_time.split()
+          const end = event.end_time.split()
+
 
           return (
           

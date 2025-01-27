@@ -17,7 +17,7 @@ export default function Home() {
 
     return (
         <View>
-            <Text>Home u sneaky</Text>
+            <Text>Fix</Text>
             <Button className="w-fit mt-4" size="sm" onPress={onLogout}>
               <ButtonText>Logout</ButtonText>
             </Button>
