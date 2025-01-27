@@ -3,6 +3,7 @@
     "start": "cd 3dpc-app && npm start"
   },
   "dependencies": {
+    "@gluestack-ui/menu": "^0.2.37",
     "@gluestack-ui/modal": "^0.1.35",
     "@legendapp/motion": "^2.4.0",
     "axios": "^1.7.9",

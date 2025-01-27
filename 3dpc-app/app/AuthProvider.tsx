@@ -43,10 +43,12 @@ export const AuthProvider = ({children}: any) => {
         authenticated: null
     });
     const [userState, setUserState] = useState<{
+        user_id: string | null,
         firstName: string | null,
         lastName: string | null,
         role: string | null
     }>({
+        user_id: null,
         firstName: null,
         lastName: null,
         role: null
@@ -69,6 +71,7 @@ export const AuthProvider = ({children}: any) => {
                     });
                     
                     setUserState({
+                        user_id: tokenPayload.user_id,
                         firstName: tokenPayload.first_name,
                         lastName:  tokenPayload.last_name,
                         role: tokenPayload.role
@@ -113,6 +116,7 @@ export const AuthProvider = ({children}: any) => {
                 authenticated: true
             });
             setUserState({
+                user_id: tokenPayload.user_id,
                 firstName: tokenPayload.first_name,
                 lastName:  tokenPayload.last_name,
                 role: tokenPayload.role

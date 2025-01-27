@@ -3,8 +3,9 @@ import { Avatar, AvatarFallbackText } from "@/components/ui/avatar";
 import { HStack } from "@/components/ui/hstack";
 import { Icon } from "@/components/ui/icon";
 import { router, Tabs, useRouter } from "expo-router";
-import { Calendar, CircleUser, Clock9, Disc3, Group, LayoutGrid, QrCode, Shield } from "lucide-react-native";
-import { Pressable, View, Text, SafeAreaView } from "react-native";
+import { Calendar, CircleUser, Disc3, LayoutGrid, SettingsIcon, Shield } from "lucide-react-native";
+import { View, Text, SafeAreaView, Pressable } from "react-native";
+import { Menu, MenuItem, MenuItemLabel } from '@/components/ui/menu';
 
 export default function TabLayout() {
   const { userState } = useAuth();
@@ -19,13 +20,39 @@ export default function TabLayout() {
             <Icon as={LayoutGrid} size="lg" className="mx-5" />
             <Text className="text-2xl">3D Printing Club</Text>
           </HStack>
-          <Pressable onPress={() => router.push("/dashboard")}>
-            <Avatar className="h-9 w-9">
-              <AvatarFallbackText className="font-light">
-                {userState?.firstName + " " + userState?.lastName}
-              </AvatarFallbackText>
-            </Avatar>
-          </Pressable>
+          <Menu
+            placement="bottom" 
+            offset={-20}
+            onSelectionChange={(keys) => {
+              if (keys.currentKey === "Profile") {
+                router.push("/profile")
+              }
+            }}
+            trigger={({ ...triggerProps }) => {
+              return (
+                <Pressable {...triggerProps}>
+                  <Avatar className="h-9 w-9">
+                    <AvatarFallbackText className="font-light">
+                      {userState?.firstName + " " + userState?.lastName}
+                    </AvatarFallbackText>
+                  </Avatar>
+                </Pressable>
+              );
+            }}
+          >
+            <MenuItem key="Profile" textValue="Profile">
+              <Icon as={CircleUser} size="sm" className="mr-2" />
+              <MenuItemLabel size="sm">Profile</MenuItemLabel>
+            </MenuItem>
+            <MenuItem key="Settings" textValue="Settings" onSelect={() => router.push("/settings")}>
+              <Icon as={SettingsIcon} size="sm" className="mr-2" />
+              <MenuItemLabel size="sm">Settings</MenuItemLabel>
+            </MenuItem>
+            <MenuItem key="Logout" textValue="Logout" onSelect={() => console.log('Logout')}>
+              <Icon as={Disc3} size="sm" className="mr-2" />
+              <MenuItemLabel size="sm">Logout</MenuItemLabel>
+            </MenuItem>
+          </Menu>
         </HStack>
 
         {/* Tabs Section - Takes up remaining space */}
