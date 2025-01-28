@@ -15,7 +15,7 @@ export default function AppLayout() {
     return <Redirect href="/" />;
   }
   if (userState?.role === "admin") {
-    return <Redirect href="/manageMeetings" />
+    return <Redirect href="/manageEvents" />
   }
 
   // This layout can be deferred because it's not the root layout.

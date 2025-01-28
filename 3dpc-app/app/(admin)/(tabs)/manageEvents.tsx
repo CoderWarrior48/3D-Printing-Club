@@ -1,3 +1,4 @@
+import { useAuth } from "@/app/AuthProvider";
 import { Button, ButtonGroup, ButtonText } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FormControl, FormControlLabel, FormControlLabelText, FormControlError, FormControlErrorIcon, FormControlErrorText } from "@/components/ui/form-control";
@@ -13,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FlatList, Modal, Pressable, ScrollView, Text, View } from "react-native";
 import uuid from 'react-native-uuid';
 
-export default function ManageMeetings() {
+export default function ManageEvents() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [events, setEvents] = useState([]);
@@ -21,12 +22,17 @@ export default function ManageMeetings() {
   const [showEditModal, setShowEditModal] = useState(false);
 
   const [eventName, setEventName] = useState("");
+  const [eventDetails, setEventDetails] = useState("");
+  const [eventLocation, setEventLocation] = useState("");
+  const [scheduledBy, setScheduledby] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [startTime, setStartTime] = useState("00/00/00");
   const [endTime, setEndTime] = useState("00/00/00");
+
   const [isInvalid, setIsInvalid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   
+  const { userState } = useAuth();
 
 
   useEffect(() => {
@@ -34,6 +40,7 @@ export default function ManageMeetings() {
   }, []);
 
   const fetchEvents = async () => {
+    console.log("get_events")
     try {
       const response = await axios.get('https://dawson.hamera.com/api/get_events.php');
       setEvents(response.data);
@@ -49,8 +56,9 @@ export default function ManageMeetings() {
   }
 
   const addEvent = async () => {
+    console.log("Adding event...")
     try {
-      const result = await axios.post('https://dawson.hamera.com/api/add_event.php', { event_name: eventName, verification_code: verificationCode, start_time: startTime, end_time: endTime });
+      const result = await axios.post('https://dawson.hamera.com/api/add_event.php', { event_name: eventName, event_details:eventDetails, event_location: eventLocation, scheduled_by:`${userState?.firstName} ${userState?.lastName}`, verification_code: verificationCode, start_time: startTime, end_time: endTime });
       if (result.data.error) {
         console.log(result.data.error)
         setIsInvalid(true)
@@ -61,7 +69,7 @@ export default function ManageMeetings() {
         setShowEditModal(false)
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error",error);
 
     }
   }
@@ -84,9 +92,9 @@ export default function ManageMeetings() {
           <Heading size="md" className="mb-1">
             {event.event_name}
           </Heading>
-          <Text>{event.verification_code}</Text>
-          <Text>{event.start_time}</Text>
-          <Text>{event.end_time}</Text>
+          <Text>{event.details}</Text>
+          <Text style={{ fontStyle: 'italic' }}>{event.verification_code}</Text>
+          <Text>{event.start_time} - {event.end_time}</Text>
         </VStack>
         <Pressable onPress={() => removeEvent(event.verification_code)}><Icon as={Trash}></Icon></Pressable></HStack>
     </Card>
@@ -123,6 +131,28 @@ export default function ManageMeetings() {
               />
             </Input>
             <FormControlLabel>
+              <FormControlLabelText>Details</FormControlLabelText>
+            </FormControlLabel>
+            <Input size="md">
+              <InputField
+                type="text"
+                placeholder="Details"
+                value={eventDetails}
+                onChangeText={(text) => setEventDetails(text)}
+              />
+            </Input>
+            <FormControlLabel>
+              <FormControlLabelText>Location</FormControlLabelText>
+            </FormControlLabel>
+            <Input size="md">
+              <InputField
+                type="text"
+                placeholder="Location"
+                value={eventLocation}
+                onChangeText={(text) => setEventLocation(text)}
+              />
+            </Input>
+            <FormControlLabel>
               <FormControlLabelText>Verification code</FormControlLabelText>
             </FormControlLabel>
             <HStack space="lg">
@@ -142,15 +172,16 @@ export default function ManageMeetings() {
             <Input size="md" className="mb-3">
               <InputField
                 type="text"
-                placeholder="Start date"
+                placeholder="YYYY-MM-DD HH:MM:SS"
                 value={startDate}
                 onChangeText={(text) => setStartDate(text)}
               />
             </Input>
+            <Text className="text-center mb-3">To</Text>
             <Input size="md">
               <InputField
                 type="text"
-                placeholder="End date"
+                placeholder="YYYY-MM-DD HH:MM:SS"
                 value={endDate}
                 onChangeText={(text) => setEndDate(text)}
               />
