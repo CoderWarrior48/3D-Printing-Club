@@ -7,12 +7,14 @@ import { Heading } from "@/components/ui/heading";
 import { HStack } from "@/components/ui/hstack";
 import { CloseIcon, Icon } from "@/components/ui/icon";
 import { Input, InputField } from "@/components/ui/input";
+import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, SelectContent, SelectDragIndicatorWrapper, SelectDragIndicator, SelectItem } from "@/components/ui/select";
 import { VStack } from "@/components/ui/vstack";
 import axios from "axios";
 import { AlertCircleIcon, PlusCircle, Trash, X } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { FlatList, Modal, Pressable, ScrollView, Text, View } from "react-native";
 import uuid from 'react-native-uuid';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function ManageEvents() {
   const [startDate, setStartDate] = useState("");
@@ -22,6 +24,7 @@ export default function ManageEvents() {
   const [showEditModal, setShowEditModal] = useState(false);
 
   const [eventName, setEventName] = useState("");
+  const [eventType, setEventType] = useState("");
   const [eventDetails, setEventDetails] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [scheduledBy, setScheduledby] = useState("");
@@ -34,6 +37,10 @@ export default function ManageEvents() {
   
   const { userState } = useAuth();
 
+  const items = [
+    {label: 'Apple', value: 'apple'},
+    {label: 'Banana', value: 'banana'}
+  ]
 
   useEffect(() => {
     fetchEvents();
@@ -130,6 +137,12 @@ export default function ManageEvents() {
                 onChangeText={(text) => setEventName(text)}
               />
             </Input>
+             
+            <DropDownPicker
+            items={items}
+            value={eventType}
+            setValue={(value) => setEventType(value)}
+          />
             <FormControlLabel>
               <FormControlLabelText>Details</FormControlLabelText>
             </FormControlLabel>
@@ -209,7 +222,7 @@ export default function ManageEvents() {
         <VStack className="gap-2">
           <Pressable className="m-3" onPress={() => setShowEditModal(true)}>
             <HStack className="gap-2 items-center">
-              <Pressable><Icon size="2xl" as={PlusCircle}></Icon></Pressable>
+              <Pressable><Icon size="xl" as={PlusCircle}></Icon></Pressable>
               <Heading size="lg" className="mb-1">
                 Create event
               </Heading>

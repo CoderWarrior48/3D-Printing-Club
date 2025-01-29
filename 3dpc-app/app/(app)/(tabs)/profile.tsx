@@ -59,7 +59,7 @@ export default function Profile() {
                 5
               </Text>
               <Text className="text-dark font-roboto text-xl">
-                Meetings
+                Workshops
               </Text>
             </VStack>
             <Divider orientation="vertical" className="h-20 bg-background-400" />
@@ -68,7 +68,7 @@ export default function Profile() {
                 5
               </Text>
               <Text className="text-dark font-roboto text-xl">
-                Workshops
+                Meetings
               </Text>
             </VStack>
             <Divider orientation="vertical" className="h-20 bg-background-400" />
@@ -84,7 +84,7 @@ export default function Profile() {
           </HStack>
         </Center>
         <Center className="p-10">
-          <Heading size="xl" className="m-15 w-80">{100-points} more to go to become an</Heading>
+          <Heading size="xl" className="m-15 w-80">{100 - points} more to go to become an</Heading>
           <Heading size="2xl" className="text-primary-500">Advanced member</Heading>
         </Center>
         <VStack className="p-5 gap-5">
@@ -100,7 +100,7 @@ export default function Profile() {
             <Text className="text-lg mb-5">
               Navigate to the scan tab and hold your phone up to the events qrcode or enter manually
             </Text>
-            <Button  onPress={() => {router.push("/meeting")}}>
+            <Button onPress={() => { router.push("/meeting") }}>
               <ButtonText size="lg">Scan</ButtonText>
             </Button>
 
@@ -110,7 +110,7 @@ export default function Profile() {
             <Text className="text-lg mb-5">
               The best way to learn 3D printing is getting hands on experience. Schedule time to come help with printer maintance, post-proccessing prints, and starting new prints!
             </Text>
-            <Button onPress={() => {router.push("/schedule")}}>
+            <Button onPress={() => { router.push("/schedule") }}>
               <ButtonText size="lg">Schedule now</ButtonText>
             </Button>
 
@@ -120,7 +120,7 @@ export default function Profile() {
             <Text className="text-lg mb-5">
               To join us for fundraising, public outreach, and more, head right over to the calender.
             </Text>
-            <Button onPress={() => {router.push("/calender")}}>
+            <Button onPress={() => { router.push("/calender") }}>
               <ButtonText size="lg">Calendar</ButtonText>
             </Button>
           </Card>
