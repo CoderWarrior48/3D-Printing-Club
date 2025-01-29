@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
+import Storage from './Storage';
 
 function parseJwt(token: any) {
     // Split the JWT into three parts (header, payload, signature)
@@ -58,7 +58,7 @@ export const AuthProvider = ({children}: any) => {
     useEffect(() => {
         const loadToken = async () => {
             try{
-                const token = await SecureStore.getItemAsync(TOKEN_KEY);
+                const token = await Storage.getItem(TOKEN_KEY);
                 console.log("Stored:",token)
 
                 if (token) {
@@ -128,7 +128,7 @@ export const AuthProvider = ({children}: any) => {
             axios.defaults.headers.common['Token'] = `Bearer ${result.data.jwt}`;
             
             //Store token securly
-            await SecureStore.setItemAsync(TOKEN_KEY, result.data.jwt);
+            await Storage.setItem(TOKEN_KEY, result.data.jwt);
 
 
         } catch (e) {
@@ -139,7 +139,7 @@ export const AuthProvider = ({children}: any) => {
 
     const logout = async () => {
         // Delete token from storage
-        await SecureStore.deleteItemAsync(TOKEN_KEY);
+        await Storage.deleteItem(TOKEN_KEY);
 
         // Update HTTP Headers
         axios.defaults.headers.common['Authorization'] = '';

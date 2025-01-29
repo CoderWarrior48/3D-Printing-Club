@@ -27,7 +27,7 @@ import { Heading } from "@/components/ui/heading"
       }
       else {
         setIsInvalid(false)
-        router.push("/profile")
+        router.push("/request")
       }
     }
     return (

@@ -7,13 +7,6 @@ import { Button, ButtonText } from "@/components/ui/button";
 export default function Home() {
     const { onLogout } = useAuth()
 
-    useEffect(() => {
-        const testCall = async () => {
-            const result = await axios.get(`${API_URL}/users`)
-            // console.log('Where in! ', result.data)
-        }
-        testCall()
-    }, [])
 
     return (
         <View>

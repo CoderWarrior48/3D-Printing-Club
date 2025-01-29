@@ -13,19 +13,6 @@ import { Timer } from "lucide-react-native";
 import { Text, View, ScrollView } from "react-native";
 
 export default function Dashboard() {
-
-  const test = async () => {
-    console.log("start")
-    try {
-    const result = await axios.post(`https://dawson.hamera.com/api/add_event.php`, {event_name:"Compettion",verification_code: "rrfrferfcerferf",start_time:"2025-01-21 14:30:00",end_time:"2025-01-21 14:30:00"});
-    console.log(axios.defaults.headers.common['Authorization'])
-    console.log("WoW",result.data)
-    
-  } catch (e) {
-    console.log("ERROR:",e)
-    return {error: true, msg: (e as any)}
-}
-  }
   // test()
   return (
     <ScrollView>
@@ -46,7 +33,6 @@ export default function Dashboard() {
             <Card size="md" variant="elevated" className="m-3">
               <Heading size="md" className="mb-1">New User</Heading>
               <Text>Name: John Doe</Text>
-              <Button onPress={test}>Test</Button>
               <HStack className="items-center mt-10">
                 <Icon as={Timer} />
                 <Text>Mon 25 - 5:00 pm</Text>
