@@ -35,6 +35,7 @@ export default function TabLayout() {
               headerShown: false,
               headerPressOpacity: 0,
               tabBarLabel: "", // Remove titles globally
+              tabBarActiveTintColor: '#2ecc71'
             }}
           >
             <Tabs.Screen
