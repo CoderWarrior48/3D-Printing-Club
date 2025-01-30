@@ -19,6 +19,7 @@ import QRCodeStyled from 'react-native-qrcode-styled';
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 
+
 export default function Profile() {
   const { userState } = useAuth()
   const [points, setPoints] = useState(20);
@@ -118,9 +119,9 @@ export default function Profile() {
           <Card>
             <Heading size="xl" className="mb-4">Participate in events</Heading>
             <Text className="text-lg mb-5">
-              To join us for fundraising, public outreach, and more, head right over to the calender.
+              To join us for fundraising, public outreach, and more, head right over to the calendar.
             </Text>
-            <Button onPress={() => { router.push("/calender") }}>
+            <Button onPress={() => { router.push("/calendar") }}>
               <ButtonText size="lg">Calendar</ButtonText>
             </Button>
           </Card>

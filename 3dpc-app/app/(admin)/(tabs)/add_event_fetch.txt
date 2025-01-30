@@ -1,61 +1,24 @@
-fetch('https://dawson.hamera.com/api/add_event.php', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'  // Change to form-urlencoded
-  },
-  body: new URLSearchParams({
-    event_name: "Football",
-    verification_code: "54gty675",
-    start_time: "2025-01-21 14:30:00",
-    end_time: "2025-01-21 14:30:00"
-  })
-})
-  .then(response => response.json())  // Parse JSON response
-  .then(data => console.log(data))     // Log the response data
-  .catch(error => console.error('Error:', error));  // Handle any errors
+{events.splice(0,5).map((event) => {
+        // const start = event.start_time.split(" ")
+        // const end = event.end_time.split(" ")
+        console.log(attendance.includes(event.event_id), event.event_id, attendance)
+        return (
 
- <FormControl
-                  isInvalid={isInvalid}
-                  size="md"
-                  isDisabled={false}
-                  isReadOnly={false}
-                  isRequired={false}
-                >
-                  <FormControlLabel>
-                    <FormControlLabelText>Name</FormControlLabelText>
-                  </FormControlLabel>
-                  <Input size="md">
-                    <InputField
-                      type="text"
-                      placeholder="name"
-                      value={eventName}
-                      onChangeText={(text) => setEventName(text)}
-                    />
-                  </Input>
-                  <FormControlLabel>
-                    <FormControlLabelText>Duration</FormControlLabelText>
-                  </FormControlLabel>
-                  <Input size="md" className="mb-3">
-                    <InputField
-                      type="text"
-                      placeholder="Start date"
-                      value={startDate}
-                      onChangeText={(text) => setStartDate(text)}
-                    />
-                  </Input>
-                  <Input size="md">
-                    <InputField
-                      type="text"
-                      placeholder="End date"
-                      value={endDate}
-                      onChangeText={(text) => setEndDate(text)}
-                    />
-                  </Input>
-                  
-                  <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} />
-                    <FormControlErrorText>
-                      {errorMessage}
-                    </FormControlErrorText>
-                  </FormControlError>
-                </FormControl>
+            
+            <Card className={attendance.includes(event.event_id) ? 'm-6 border border-2 border-primary-200' : 'm-6 border'} key={event.event_id}>
+
+                <VStack className="w-2/3">
+                  {/* <Text>{start[0]}</Text> */}
+                  <Heading size="xl">{event.event_name}</Heading>
+                  <Text>{event.location}</Text>
+                  <Text>{event.details}</Text>
+                  <Text className="font-bold">Scheduled by {event.scheduled_by}</Text>
+                </VStack>
+
+        
+
+              {/* <Button disabled={true}><ButtonText>Scheduled by {event.scheduled_by}</ButtonText></Button> */}
+           </Card>
+  
+        )
+      })}

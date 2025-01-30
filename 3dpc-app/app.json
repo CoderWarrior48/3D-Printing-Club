@@ -9,13 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.do3dpc.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/3dpc.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.do3dpc.app"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +39,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e744227b-73fe-412f-9abd-950e92c3ea43"
+      }
     }
   }
 }

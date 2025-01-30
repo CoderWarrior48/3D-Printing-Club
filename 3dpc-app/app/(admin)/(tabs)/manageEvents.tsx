@@ -10,15 +10,19 @@ import { Input, InputField } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, SelectContent, SelectDragIndicatorWrapper, SelectDragIndicator, SelectItem } from "@/components/ui/select";
 import { VStack } from "@/components/ui/vstack";
 import axios from "axios";
-import { AlertCircleIcon, PlusCircle, Trash, X } from "lucide-react-native";
+import { AlertCircleIcon, Minus, PlusCircle, Trash, X } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { FlatList, Modal, Pressable, ScrollView, Text, View } from "react-native";
 import uuid from 'react-native-uuid';
 import DropDownPicker from 'react-native-dropdown-picker';
+import ModalDropdown from 'react-native-modal-dropdown';
+import QRCodeStyled from 'react-native-qrcode-styled';
+
+import { Box } from "@/components/ui/box";
+import { Divider } from "@/components/ui/divider";
+
 
 export default function ManageEvents() {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -29,18 +33,15 @@ export default function ManageEvents() {
   const [eventLocation, setEventLocation] = useState("");
   const [scheduledBy, setScheduledby] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
-  const [startTime, setStartTime] = useState("00/00/00");
-  const [endTime, setEndTime] = useState("00/00/00");
+  const [eventDate, setEventDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   const [isInvalid, setIsInvalid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  
+
   const { userState } = useAuth();
 
-  const items = [
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'}
-  ]
 
   useEffect(() => {
     fetchEvents();
@@ -64,8 +65,10 @@ export default function ManageEvents() {
 
   const addEvent = async () => {
     console.log("Adding event...")
+
     try {
-      const result = await axios.post('https://dawson.hamera.com/api/add_event.php', { event_name: eventName, event_details:eventDetails, event_location: eventLocation, scheduled_by:`${userState?.firstName} ${userState?.lastName}`, verification_code: verificationCode, start_time: startTime, end_time: endTime });
+      const result = await axios.post('https://dawson.hamera.com/api/add_event.php', { event_name: eventName, event_type: eventType, event_details: eventDetails, event_location: eventLocation, scheduled_by: `${userState?.firstName} ${userState?.lastName}`, verification_code: verificationCode, event_date: eventDate, start_time: startTime, end_time: endTime });
+      console.log(result.data)
       if (result.data.error) {
         console.log(result.data.error)
         setIsInvalid(true)
@@ -76,14 +79,14 @@ export default function ManageEvents() {
         setShowEditModal(false)
       }
     } catch (error) {
-      console.error("Error",error);
+      console.error("Error", error);
 
     }
   }
 
   const removeEvent = async (code: String) => {
     try {
-      const result = await axios.post('https://dawson.hamera.com/api/remove_event.php', {verification_code: code});
+      const result = await axios.post('https://dawson.hamera.com/api/remove_event.php', { verification_code: code });
       fetchEvents()
       console.log("Deleted successfully", result)
     } catch (error) {
@@ -92,20 +95,55 @@ export default function ManageEvents() {
     }
   }
 
-  const renderEvents = events.map((event) => (
-    <Card size="md" variant="elevated" className="m-3">
-      <HStack>
-        <VStack className="flex-1">
-          <Heading size="md" className="mb-1">
-            {event.event_name}
-          </Heading>
-          <Text>{event.details}</Text>
-          <Text style={{ fontStyle: 'italic' }}>{event.verification_code}</Text>
-          <Text>{event.start_time} - {event.end_time}</Text>
-        </VStack>
-        <Pressable onPress={() => removeEvent(event.verification_code)}><Icon as={Trash}></Icon></Pressable></HStack>
-    </Card>
-  ))
+  const renderEvents = events.map((event) => {
+    console.log("s", event.start_time)
+    return (
+      <HStack className="">
+        <Box className="bg-primary-500 p-3 ml-5 rounded items-center">
+          <Text className="font-bold">{new Date(event.event_date).getDate().toString().padStart(2, '0')}</Text>
+          <Text className="font-bold">{new Date(event.event_date).toLocaleString('en-US', { month: 'short' }).toUpperCase()}</Text>
+        </Box>
+
+        <Card size="md" variant="elevated" className="ml-5 mr-5 flex-1">
+          <HStack>
+            <VStack className="flex-1">
+              <HStack>
+                <Text>{new Date(`1970-01-01T${event.start_time}Z`).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</Text>
+                <Text>  -  </Text>
+                <Text>{new Date(`1970-01-01T${event.end_time}Z`).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</Text>
+                <View className="flex-1"></View>
+                <Text className="italic">{event.event_type}</Text>
+              </HStack>
+              <Divider />
+            </VStack>
+            <Pressable className="pl-3" onPress={() => removeEvent(event.verification_code)}><Icon as={Trash}></Icon></Pressable>
+          </HStack>
+          <HStack className="">
+
+            <VStack className="flex-1">
+
+              <Heading size="lg" className="mb-1">
+                {event.event_name}
+              </Heading>
+              <Text className="text-bold">{event.event_location}</Text>
+              <Text>{event.details}</Text>
+
+
+            </VStack>
+            <VStack className="items-center p-5">
+              <QRCodeStyled
+                data={event.verification_code}
+                pieceSize={3}
+                pieceLiquidRadius={2}
+              />
+              <Text style={{ fontStyle: 'italic' }}>{event.verification_code}</Text>
+            </VStack>
+          </HStack>
+        </Card>
+
+      </HStack>
+    )
+  })
 
   if (loading) {
     return <Text>Loading...</Text>
@@ -137,12 +175,19 @@ export default function ManageEvents() {
                 onChangeText={(text) => setEventName(text)}
               />
             </Input>
-             
-            <DropDownPicker
-            items={items}
-            value={eventType}
-            setValue={(value) => setEventType(value)}
-          />
+
+
+            <ModalDropdown
+              defaultValue="Type"
+              options={['Workshop', 'Meeting', 'Fundraiser', 'Other']}
+              onSelect={(index, value) => setEventType(value)}
+              style={{ backgroundColor: '#2ECC87', padding: 10, borderRadius: 5, marginTop: 20 }}
+              dropdownStyle={{ backgroundColor: '#ffffff', borderRadius: 5, padding: 10 }}
+              textStyle={{ fontSize: 16, color: '#333333' }}
+              dropdownTextStyle={{ fontSize: 16, color: '#333333' }}
+              dropdownTextHighlightStyle={{ color: '#2ECC87' }}
+            />
+
             <FormControlLabel>
               <FormControlLabelText>Details</FormControlLabelText>
             </FormControlLabel>
@@ -180,26 +225,38 @@ export default function ManageEvents() {
               <Button><ButtonText onPress={() => generateCode()}>Generate</ButtonText></Button>
             </HStack>
             <FormControlLabel>
-              <FormControlLabelText>Duration</FormControlLabelText>
+              <FormControlLabelText>Date</FormControlLabelText>
             </FormControlLabel>
-            <Input size="md" className="mb-3">
-              <InputField
-                type="text"
-                placeholder="YYYY-MM-DD HH:MM:SS"
-                value={startDate}
-                onChangeText={(text) => setStartDate(text)}
-              />
-            </Input>
-            <Text className="text-center mb-3">To</Text>
             <Input size="md">
               <InputField
                 type="text"
-                placeholder="YYYY-MM-DD HH:MM:SS"
-                value={endDate}
-                onChangeText={(text) => setEndDate(text)}
+                placeholder="Date"
+                value={eventDate}
+                onChangeText={(text) => setEventDate(text)}
               />
             </Input>
-
+            <FormControlLabel>
+              <FormControlLabelText>Duration</FormControlLabelText>
+            </FormControlLabel>
+            <HStack className="items-center">
+              <Input size="md" className="w-50 flex-1">
+                <InputField
+                  type="text"
+                  placeholder="Start"
+                  value={startTime}
+                  onChangeText={(text) => setStartTime(text)}
+                />
+              </Input>
+              <Icon as={Minus}></Icon>
+              <Input size="md" className="flex-1">
+                <InputField
+                  type="text"
+                  placeholder="End"
+                  value={endTime}
+                  onChangeText={(text) => setEndTime(text)}
+                />
+              </Input>
+            </HStack>
             <FormControlError>
               <FormControlErrorIcon as={AlertCircleIcon} />
               <FormControlErrorText>

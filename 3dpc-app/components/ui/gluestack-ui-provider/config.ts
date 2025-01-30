@@ -8,7 +8,7 @@ export const config = {
     '--color-primary-200': '143, 230, 180',
     '--color-primary-300': '109, 222, 157',
     '--color-primary-400': '76, 215, 135',
-    '--color-primary-500': '46, 204, 113',
+    '--color-primary-500': '46, 204, 204',
     '--color-primary-600': '36, 158, 88',
     '--color-primary-700': '25, 112, 62',
     '--color-primary-800': '15, 67, 37',

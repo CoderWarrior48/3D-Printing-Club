@@ -3,7 +3,7 @@ import { Avatar, AvatarFallbackText } from "@/components/ui/avatar";
 import { HStack } from "@/components/ui/hstack";
 import { Icon } from "@/components/ui/icon";
 import { router, Tabs, useRouter } from "expo-router";
-import { Calendar, CircleUser, Clock9, Disc3, LayoutGrid, QrCode } from "lucide-react-native";
+import { Calendar, CircleUser, Clock9, Disc3, LayoutGrid, QrCode, Settings } from "lucide-react-native";
 import { Pressable, View, Text, SafeAreaView } from "react-native";
 
 export default function TabLayout() {
@@ -14,14 +14,14 @@ export default function TabLayout() {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         {/* Header Section */}
-        <HStack className="pt-4 pr-10 pb-3 bg-background-0 items-center justify-between border-b border-border-300">
+        <HStack className="pt-4 pr-10 pb-3 items-center justify-between border-b border-border-300">
           <HStack className="items-center">
             <Icon as={LayoutGrid} size="lg" className="mx-5" />
             <Text className="text-2xl">3D Printing Club</Text>
           </HStack>
-          <Pressable onPress={() => router.push("/profile")}>
+          <Pressable onPress={() => router.push("/settings")}>
             <Avatar className="h-9 w-9">
-              <AvatarFallbackText className="font-light">
+              <AvatarFallbackText>
                 {userState?.firstName + " " + userState?.lastName}
               </AvatarFallbackText>
             </Avatar>
@@ -63,15 +63,15 @@ export default function TabLayout() {
               }}
             />
             <Tabs.Screen
-              name="request"
+              name="settings"
               options={{
                 tabBarIcon: ({ color, focused }) => (
-                  <Icon as={Disc3} size="xl" color={color} />
+                  <Icon as={Settings} size="xl" color={color} />
                 ),
               }}
             />
             <Tabs.Screen
-              name="calender"
+              name="calendar"
               options={{
                 tabBarIcon: ({ color, focused }) => (
                   <Icon as={Calendar} size="xl" color={color} />
